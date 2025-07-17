@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List | Hearthstone Fan Portal</title>
+    <link rel="stylesheet" href="css/todolist.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="hs-header">
+  <div class="logo">
+    <img src="images/logo.png" alt="Hearthstone" class="logo-img">
+  </div>
+  <nav class="hs-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link active">Главная</a></li>
+      <li><a href="cards.html" class="nav-link">Карты</a></li>
+      <li><a href="feedback.php" class="nav-link">Обратная связь</a></li>
+      <li><a href="todolist.html" class="nav-link">ToDo List</a></li>
+    </ul>
+  </nav>
+</header>
+
+    <main class="hs-main">
+        <section class="todo-section">
+            <h1>Hearthstone ToDo List</h1>
+            <p>Организуйте свои задачи по изучению карт и созданию колод</p>
+            
+            <div class="todo-container">
+                <div class="todo-input">
+                    <input type="text" id="taskInput" placeholder="Новая задача...">
+                    <input type="date" id="taskDate">
+                    <button id="addTaskBtn" class="hs-button">Добавить</button>
+                </div>
+                
+                <div class="todo-controls">
+                    <button id="deleteSelectedBtn" class="hs-button danger">Удалить выбранные</button>
+                </div>
+                
+                <div id="taskList" class="task-list">
+                    <!-- Задачи будут добавляться здесь -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="hs-footer">
+        <p>&copy; 2023 Hearthstone Fan Portal. Все права защищены.</p>
+    </footer>
+
+    <script src="js/todolist.js"></script>
+</body>
+</html>

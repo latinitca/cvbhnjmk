@@ -1,0 +1,191 @@
+/* Герой-секция на главной */
+.hero {
+  background-image: url('../images/hero-bg.jpg');
+  background-size: cover; /* Заполняет весь блок */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60vh;
+}
+
+/* Адаптивность фона */
+@media (max-width: 768px) {
+  .hero {
+    background-size: contain;
+    background-position: top;
+  }
+}
+/* Все изображения по умолчанию */
+img {
+  max-width: 100%; /* Не превышает ширину контейнера */
+  height: auto; /* Сохраняет пропорции */
+  display: block; /* Убирает лишние отступы */
+}
+
+/* Карточки (главная, новости) */
+.news-card img, 
+.deck-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Заполняет контейнер с обрезкой */
+  object-position: center;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Иконки (лого, соцсети) */
+.logo img, 
+.social-links img {
+  width: auto; /* Оригинальный размер */
+  height: 40px; /* Фиксированная высота */
+  object-fit: contain; /* Вписывает без обрезки */
+}/* Общие стили для всех страниц */
+/* Плавные переходы */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Анимация кнопок */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cta-button {
+  animation: pulse 2s infinite;
+}
+
+/* Эффект при наведении на карточки */
+.news-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(255,204,0,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.news-card:hover::after {
+  opacity: 1;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #1a1a1a url('../images/bg-texture.png');
+    color: #fff;
+}
+
+.hs-header {
+  background: linear-gradient(to right, #1a1a1a, #3a0a0a);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.nav-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-family: 'Playfair Display', serif;
+}
+
+.nav-link:hover {
+  background-color: #ffcc00;
+  color: #1a1a1a;
+}
+
+.hero {
+  background: url('../images/задний_фон.jpeg') center/cover;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-button {
+  background: #ffcc00;
+  color: #1a1a1a;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.news-card {
+  background: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.news-card:hover {
+  transform: translateY(-10px);
+}
+
+.news-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff3333;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+.hs-footer {
+  background: linear-gradient(to right, #1a1a1a, #3a0a0a);
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 2px solid #ffcc00;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-links img {
+  height: 30px;
+  margin-left: 15px;
+  transition: transform 0.3s;
+}
+
+.social-links img:hover {
+  transform: scale(1.2);
+}

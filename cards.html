@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Карты | Hearthstone</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+<header class="hs-header">
+  <div class="logo">
+    <img src="images/logo.png" alt="Hearthstone" class="logo-img">
+  </div>
+  <nav class="hs-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link active">Главная</a></li>
+      <li><a href="cards.html" class="nav-link">Карты</a></li>
+      <li><a href="feedback.php" class="nav-link">Обратная связь</a></li>
+      <li><a href="todolist.html" class="nav-link">ToDo List</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main class="hs-main">
+    <section class="cards-section">
+      <h1>Коллекция карт</h1>
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Поиск...">
+        <select id="classFilter">
+          <option value="all">Все классы</option>
+          <option value="mage">Маг</option>
+          <option value="warrior">Воин</option>
+        </select>
+      </div>
+
+      <div class="cards-grid" id="cardsGrid">
+        <div class="card" data-class="mage">
+          <img src="images/рагнарос.jpg" alt="Рагнарос">
+          <h3>Рагнарос</h3>
+          <p class="rarity-legendary">★ Легендарная</p>
+        </div>
+        <div class="card" data-class="warrior">
+          <img src="images/громмаш.jpg" alt="Громмаш">
+          <h3>Громмаш</h3>
+          <p class="rarity-legendary">★ Легендарная</p>
+        </div>
+        <!-- Добавьте больше карт -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="hs-footer">
+    <!-- Подвал из index.html -->
+  </footer>
+
+  <script src="js/cards.js"></script>
+</body>
+</html>

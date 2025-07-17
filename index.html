@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
+  <meta charset="UTF-8">
+  <title>Hearthstone Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hs-header">
+  <div class="logo">
+    <img src="images/logo.png" alt="Hearthstone" class="logo-img">
+  </div>
+  <nav class="hs-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link active">Главная</a></li>
+      <li><a href="cards.html" class="nav-link">Карты</a></li>
+      <li><a href="feedback.php" class="nav-link">Обратная связь</a></li>
+      <li><a href="todolist.html" class="nav-link">ToDo List</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main class="hs-main">
+    <section class="hero">
+  <div class="hero-content">
+    <h1>Добро пожаловать в Hearthstone!</h1>
+    <p>Исследуйте карты, улучшайте свои навыки</p>
+    <a href="cards.html" class="cta-button">Начать</a>
+  </div>
+
+
+</section>
+
+    <section class="news-section">
+  <h2>Последние новости</h2>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-tag">Обновление</div>
+      <h3>Новое дополнение</h3>
+      <p>Уже в игре!</p>
+      <img src="images/новое дополнение.jpg" alt="Новое дополнение">
+    </div>
+    <div class="news-card">
+      <div class="news-tag">Турнир</div>
+      <h3>Открытый турнир</h3>
+      <p>Регистрация до 38 </p>
+      <img src="images/турнир.png" alt="Турнир">
+    </div>
+  </div>
+</section>
+  </main>
+
+<footer class="hs-footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Hearthstone Portal</p>
+    <div class="social-links">
+      <a href="#"><img src="images/social-twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="images/social-discord.png" alt="Discord"></a>
+    </div>
+  </div>
+</footer>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+          console.log('ServiceWorker registration successful');
+        })
+        .catch(err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+</script>
+</body>
+</html>
