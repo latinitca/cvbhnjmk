@@ -1,19 +1,20 @@
 {
-  "name": "Задание 2",
-  "short_name": "р2",
-  "start_url": "/",
+  "name": "Hearthstone Portal",
+  "short_name": "HS Portal",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#1a1a1a",
+  "theme_color": "#d32f2f",
   "icons": [
     {
-      "src": "icons8-x-192.png",
+      "src": "./icons8-x-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons8-x-512.png",
+      "src": "./icons8-x-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
