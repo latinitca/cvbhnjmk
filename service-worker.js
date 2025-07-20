@@ -1,75 +1,93 @@
-const CACHE_NAME = 'hearthstone-cache-v2';
-const urlsToCache = [
+// Название кеша и версия
+const CACHE_NAME = 'hearthstone-portal-v2';
+const OFFLINE_URL = '/offline.html';
+
+// Файлы для предварительного кеширования
+const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/feedback.php',
-  '/todolist.html',
   '/cards.html',
+  '/todolist.html',
+  '/feedback.php',
   '/css/style.css',
-  '/css/todolist.css',
   '/css/cards.css',
-  '/js/todolist.js',
+  '/js/cards.js',
   '/images/logo.png',
-  '/images/hero-bg.jpg',
-  '/images/задний_фон.jpeg',
   '/images/новое дополнение.jpg',
   '/images/турнир.png',
+  '/images/рагнарос.jpg',
+  '/images/громмаш.jpg',
   '/images/social-twitter.png',
-  '/images/social-discord.png'
+  '/images/social-discord.png',
+  '/manifest.json'
 ];
 
+// Установка Service Worker и кеширование ресурсов
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(urlsToCache);
+        console.log('Кеширование основных ресурсов');
+        return cache.addAll(PRECACHE_URLS);
       })
+      .then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Возвращаем кэшированный ответ, если он есть
-        if (response) {
-          return response;
-        }
-        
-        // Иначе делаем сетевой запрос
-        return fetch(event.request).then(
-          function(response) {
-            // Проверяем, валидный ли ответ
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Клонируем ответ
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-  );
-});
-
+// Активация и очистка старых кешей
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Удаление старого кеша:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     })
+    .then(() => self.clients.claim())
+  );
+});
+
+// Стратегия работы с запросами: сначала кеш, потом сеть
+self.addEventListener('fetch', event => {
+  // Пропускаем POST-запросы и запросы к API
+  if (event.request.method !== 'GET') return;
+  
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // Возвращаем кешированный ответ, если есть
+        if (response) {
+          return response;
+        }
+
+        // Для HTML-страниц: возвращаем кешированную версию или offline.html
+        if (event.request.headers.get('accept').includes('text/html')) {
+          return fetch(event.request)
+            .catch(() => caches.match(OFFLINE_URL));
+        }
+
+        // Для остальных ресурсов: сначала сеть, потом кеш
+        return fetch(event.request)
+          .then(response => {
+            // Кешируем только успешные ответы
+            if (response && response.status === 200) {
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => cache.put(event.request, responseToCache));
+            }
+            return response;
+          })
+          .catch(() => {
+            // Для изображений возвращаем заглушку
+            if (event.request.url.match(/\.(jpe?g|png|gif|svg)$/)) {
+              return caches.match('/images/logo.png');
+            }
+            return new Response('Нет соединения', { status: 503 });
+          });
+      })
   );
 });
